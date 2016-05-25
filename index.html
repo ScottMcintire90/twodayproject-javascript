@@ -12,19 +12,30 @@
 
    
 
-      <div class="col-md-6">
+      <div class="col-md-4">
         <div id="map"></div>
         <input id="pac-input" class="controls" type="text" placeholder="Search Box">
       </div>
+      <div class="col-md-4">
+      </div>
+      <div class="col-md-4">
 
-      <div class="col-md-6">
-        <form id="newView">
           <label for="title">Title</label>
           <input id="title" name="title" type="text">
           </br>
           <label for="address">Address</label>
           <input id="address" name="address" type="text">
-        </form>
+          <button type="click" id="newView" class="btn btn-primary">Submit</button>
+     
+
+        <div id="places">
+          <h3>Places to View</h3>
+
+          <ul id="placeList">
+            <span id="addView"></span>
+          </ul>
+
+        </div>
       </div>
 
   </body>

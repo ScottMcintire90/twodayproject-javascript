@@ -66,6 +66,10 @@ font-weight: 300;
 	text-align: center;
 }
 
-#newView input {
+input {
 	color: black;
+}
+
+#placeColor {
+	color: white;
 }
