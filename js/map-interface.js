@@ -69,7 +69,9 @@ function initAutocomplete() {
 }
 
 
-
+function addView(){
+	
+}
 
 
 

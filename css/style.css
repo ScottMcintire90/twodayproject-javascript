@@ -6,6 +6,8 @@ body{
 #map {
   width: 700px;
   height: 700px;
+  border: 10px solid black;
+  margin-left: 70px;
 }
 
 #find{
@@ -16,11 +18,6 @@ body{
 	color: black;
 }
 
-html, body {
-height: 100%;
-margin: 0;
-padding: 0;
-}
 
 .controls {
 margin-top: 10px;
@@ -63,6 +60,12 @@ font-family: Roboto;
 font-size: 13px;
 font-weight: 300;
 }
-#target {
-width: 345px;
+
+.header {
+	color: black;
+	text-align: center;
+}
+
+#newView input {
+	color: black;
 }
