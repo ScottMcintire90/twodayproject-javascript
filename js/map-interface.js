@@ -1,6 +1,7 @@
 var Place = require("./../js/Place.js").Place;
-$( document ).ready(function() {
 
+
+$( document ).ready(function() {
   $('#newView').click(function(){
   	
   	var title = $('#title').val();
@@ -9,20 +10,20 @@ $( document ).ready(function() {
   	$('#address').val("");
   	var newPlace = new Place(title, address);
 
-	console.log(title);
-	console.log(address);
-  	$('#addView').append("<li><button type='click' id='placeColor'>" + newPlace.getTitle() + "</button></li>");
-  	console.log(newPlace.getTitle());
+	
+  	$('#addView').append("<li><button class='location' type='click' id=" + "'" + newPlace.getAddress() + "'" + ">" + newPlace.getTitle() + "</button></li>");
+  	
+  	$('.location').last().click(function(){
+	  var address = $(this).attr("id");
+	  console.log(address);
+	});
  
   });
   initAutocomplete();
 });
 
-	function findPlace(){
-		$('THIS BUTTON').click(function(){
-			//target the input, and fill in the "newPlace.getAddress()"
-		})
-	}
+
+
 
 
 function initAutocomplete() {
@@ -87,16 +88,3 @@ function initAutocomplete() {
     map.fitBounds(bounds);
   });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
