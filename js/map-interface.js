@@ -1,7 +1,13 @@
 //require Place object to be used with creating new addresses.
 var Place = require("./../js/Place.js").Place;
+var Map = require("./../js/Map.js").Map;
 
 $( document ).ready(function() {
+
+  //automatically initialize map at the location of Epicodus in Portland, OR
+  var newMap = new Map("400 SW 6th Ave #800, Portland, OR 97204");
+  newMap.initialize();
+  newMap.codeAddress();
 
   //click function that adds view to list.
   $('#newView').click(function(){
@@ -17,43 +23,9 @@ $( document ).ready(function() {
     //click listener for which address was clicked, initializes map and converts address to latlang.
   	$('.location').last().click(function() {
 	    var address = $(this).attr("id");
-	    initialize();
-	    codeAddress(address);
+      var newMap = new Map(address);
+	    newMap.initialize();
+	    newMap.codeAddress();
 	  });
   });
-
-  //automatically initialize map at the location of Epicodus in Portland, OR
-  initialize();
-  codeAddress("400 SW 6th Ave #800, Portland, OR 97204")
 });
-
-//variables for map functions below.
-var geocoder;
-var map;
-var panorama;
-
-//initialize function gets map ready, sets to panorama view.
-function initialize() {
-  geocoder = new google.maps.Geocoder();
-  var latlng = new google.maps.LatLng(-34.397, 150.644);
-  var mapOptions = {
-    zoom: 8,
-    center: latlng
-  }
-  panorama = new google.maps.StreetViewPanorama(document.getElementById("map"), mapOptions);
-}
-
-//codeAddress takes user address and converts to latlang coordinates, finishes map.
-function codeAddress(address) {
-  geocoder.geocode( { 'address': address}, function(results, status) {
-    if (status == google.maps.GeocoderStatus.OK) {
-      panorama.setPosition(results[0].geometry.location);
-      panorama = new google.maps.StreetViewPanorama({
-          map: map,
-          position: results[0].geometry.location
-      });
-    } else {
-      alert("Geocode was not successful for the following reason: " + status);
-    }
-  });
-}

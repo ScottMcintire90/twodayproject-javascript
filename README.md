@@ -3,7 +3,7 @@
 #### An online View Finder Application
 #### May 16, 2016
 
-#### By Scott McIntire and Justin Folkes
+#### By Scott McIntire and Justin Fokes
 
 ## Description
 
