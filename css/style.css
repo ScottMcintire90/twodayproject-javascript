@@ -1,7 +1,14 @@
 body{
-	background-color: #333;
 	color: white;
 	font-family: Roboto;
+}
+
+html {
+  background: url(http://www.webdesignburn.com/wp-content/uploads/2015/04/Grey-Texture-Background-and-Wallpaper-12.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 #map {
@@ -57,14 +64,14 @@ body{
 }
 
 #type-selector label {
-	font-size: 13px;
-	font-weight: 300;
+	font-size: 15px;
+	font-weight: 200;
 }
 
 .header {
 	color: black;
 	text-align: center;
-	letter-spacing: 20px;
+	letter-spacing: 40px;
 }
 
 input {
@@ -81,9 +88,10 @@ input {
 }
 
 .jumbotron {
+	background-color: white;
     padding: 0.5em 0.6em;
     h1 {
-        font-size: 2em;
+        font-size: 4em;
     }
     p {
         font-size: 1.6em;
@@ -98,10 +106,15 @@ input {
 }
 
 #views {
-	margin: 100px;
+	margin: 50px;
+	margin-left: 200px;
 }
 
 .location {
 	font-size: 19px;
 	color: white;
+}
+
+h2, h3 {
+	letter-spacing: 10px;
 }
