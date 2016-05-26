@@ -1,12 +1,14 @@
 body{
 	background-color: #333;
 	color: white;
+	font-family: Roboto;
 }
 
 #map {
 	width: 700px;
-	height: 700px;
+	height: 600px;
 	border: 10px solid black;
+	border-radius: 4px;
 	margin-left: 70px;
 }
 
@@ -55,7 +57,6 @@ body{
 }
 
 #type-selector label {
-	font-family: Roboto;
 	font-size: 13px;
 	font-weight: 300;
 }
@@ -63,6 +64,7 @@ body{
 .header {
 	color: black;
 	text-align: center;
+	letter-spacing: 20px;
 }
 
 input {
@@ -73,3 +75,33 @@ input {
 	color: white;
 }
 
+#placesToView {
+	padding-top: 20px;
+	text-align: left;
+}
+
+.jumbotron {
+    padding: 0.5em 0.6em;
+    h1 {
+        font-size: 2em;
+    }
+    p {
+        font-size: 1.6em;
+        .btn {
+            padding: 0.5em;
+        }
+    }
+}
+
+.intro {
+	padding-left: 75px;
+}
+
+#views {
+	margin: 100px;
+}
+
+.location {
+	font-size: 19px;
+	color: white;
+}

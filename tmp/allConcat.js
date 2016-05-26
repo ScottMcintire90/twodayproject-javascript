@@ -1,116 +1,59 @@
+//require Place object to be used with creating new addresses.
 var Place = require("./../js/Place.js").Place;
 
-
 $( document ).ready(function() {
+
+  //click function that adds view to list.
   $('#newView').click(function(){
-  	
   	var title = $('#title').val();
   	var address = $('#address').val();
   	$('#title').val("");
   	$('#address').val("");
   	var newPlace = new Place(title, address);
 
-	
+    //adds view to list with button and id with value of its address.
   	$('#addView').append("<li><button class='location' type='click' id=" + "'" + newPlace.getAddress() + "'" + ">" + newPlace.getTitle() + "</button></li>");
-  	
-  	$('.location').last().click(function(){
-	  var address = $(this).attr("id");
-	  initialize();
-	  codeAddress(address);
-	});
- 
+
+    //click listener for which address was clicked, initializes map and converts address to latlang.
+  	$('.location').last().click(function() {
+	    var address = $(this).attr("id");
+	    initialize();
+	    codeAddress(address);
+	  });
   });
-  initAutocomplete();
+
+  //automatically initialize map at the location of Epicodus in Portland, OR
+  initialize();
+  codeAddress("400 SW 6th Ave #800, Portland, OR 97204")
 });
 
+//variables for map functions below.
+var geocoder;
+var map;
+var panorama;
 
-  var geocoder;
-  var map;
-
-  function initialize() {
-    geocoder = new google.maps.Geocoder();
-    var latlng = new google.maps.LatLng(-34.397, 150.644);
-    var mapOptions = {
-      zoom: 8,
-      center: latlng
-    }
-    map = new google.maps.Map(document.getElementById("map"), mapOptions);
+//initialize function gets map ready, sets to panorama view.
+function initialize() {
+  geocoder = new google.maps.Geocoder();
+  var latlng = new google.maps.LatLng(-34.397, 150.644);
+  var mapOptions = {
+    zoom: 8,
+    center: latlng
   }
+  panorama = new google.maps.StreetViewPanorama(document.getElementById("map"), mapOptions);
+}
 
-  function codeAddress(address) {
-    geocoder.geocode( { 'address': address}, function(results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-        map.setCenter(results[0].geometry.location);
-        var marker = new google.maps.Marker({
-            map: map,
-            position: results[0].geometry.location
-        });
-      } else {
-        alert("Geocode was not successful for the following reason: " + status);
-      }
-    });
-  }
-
-
-function initAutocomplete() {
-  var map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 45.5231, lng: -122.6765},
-    zoom: 13,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  });
-
-  // Create the search box and link it to the UI element.
-  var input = document.getElementById('pac-input');
-  var searchBox = new google.maps.places.SearchBox(input);
-  map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-  // Bias the SearchBox results towards current map's viewport.
-  map.addListener('bounds_changed', function() {
-    searchBox.setBounds(map.getBounds());
-  });
-
-  var markers = [];
-  // Listen for the event fired when the user selects a prediction and retrieve
-  // more details for that place.
-  searchBox.addListener('places_changed', function() {
-    var places = searchBox.getPlaces();
-
-    if (places.length == 0) {
-      return;
+//codeAddress takes user address and converts to latlang coordinates, finishes map.
+function codeAddress(address) {
+  geocoder.geocode( { 'address': address}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      panorama.setPosition(results[0].geometry.location);
+      panorama = new google.maps.StreetViewPanorama({
+          map: map,
+          position: results[0].geometry.location
+      });
+    } else {
+      alert("Geocode was not successful for the following reason: " + status);
     }
-
-    // Clear out the old markers.
-    markers.forEach(function(marker) {
-      marker.setMap(null);
-    });
-    markers = [];
-
-    // For each place, get the icon, name and location.
-    var bounds = new google.maps.LatLngBounds();
-    places.forEach(function(place) {
-      var icon = {
-        url: place.icon,
-        size: new google.maps.Size(71, 71),
-        origin: new google.maps.Point(0, 0),
-        anchor: new google.maps.Point(17, 34),
-        scaledSize: new google.maps.Size(25, 25)
-      };
-
-      // Create a marker for each place.
-      markers.push(new google.maps.Marker({
-        map: map,
-        icon: icon,
-        title: place.name,
-        position: place.geometry.location
-      }));
-
-      if (place.geometry.viewport) {
-        // Only geocodes have viewport.
-        bounds.union(place.geometry.viewport);
-      } else {
-        bounds.extend(place.geometry.location);
-      }
-    });
-    map.fitBounds(bounds);
   });
 }
